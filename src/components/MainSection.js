@@ -51,6 +51,14 @@ const Links = [
     fontWeight: true,
     key: 6,
   },
+
+  {
+    title: "Contact Me",
+    link: "/contact",
+    id: "contact",
+    fontWeight: true,
+    key: 6,
+  },
 ];
 
 const MainSection = () => {
