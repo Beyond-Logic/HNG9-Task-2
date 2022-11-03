@@ -23,11 +23,13 @@ const ContactForm = () => {
               title="First name"
               type="text"
               placeholder="Enter your first name"
+              id="first_name"
             />
             <InputField
               title="Last name"
               type="text"
               placeholder="Enter your last name"
+              id="last_name"
             />
           </div>
           <div className="mt-[24px]">
@@ -35,12 +37,14 @@ const ContactForm = () => {
               title="Email"
               type="email"
               placeholder="yourname@email.com"
+              id="email"
             />
           </div>
           <div className="mt-[24px]">
             <TextAreaField
               title="Message"
               placeholder="Send me a message and I'll reply you as soon as possible..."
+              id="message"
             />
           </div>
           <div className="mt-[24px] flex space-x-[12px] cursor-pointer">
