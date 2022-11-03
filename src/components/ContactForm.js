@@ -1,10 +1,12 @@
 /** @format */
 
 import React, { useState } from "react";
+import { Formik } from "formik";
 import InputField from "./InputField";
 import TextAreaField from "./TextAreaField";
 import InputCheckBoxOff from "../assets/InputCheckBox1.svg";
 import InputCheckBoxOn from "../assets/InputCheckBox2.svg";
+import ErrorMessage from "./ErrorMessage";
 
 const ContactForm = () => {
   const initialState = {
@@ -16,49 +18,14 @@ const ContactForm = () => {
 
   const [contactFormData, setContactFormData] = useState(initialState);
 
-  const { first_name, last_name, email, message } = contactFormData;
-
-  // const [errors, setErrors] = useState({});
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setContactFormData({
-      ...contactFormData,
-      [name]: value,
-    });
-  };
-
-  const validateEmail = (email) => {
-    return String(email)
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      );
-  };
-
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
 
   const handleToggleCheckBox = () => {
     setToggleCheckBox(!toggleCheckBox);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    try {
-      const { name, value } = e.target;
-      if (first_name && last_name && validateEmail(email)) {
-        setContactFormData({
-          [name]: value,
-        });
-      } else {
-        // setError(true);
-      }
-    } catch (error) {
-      console.log("error");
-    }
-  };
-
   const name = "BeyondLogic";
+  console.log("object,", contactFormData);
 
   return (
     <div className="md:mt-[156px] mt-[64px] xl:px-[360px] lg:px-[180px] md:px-[90px] px-[16px]">
@@ -71,92 +38,149 @@ const ContactForm = () => {
             Hi there, contact me to ask me about anything you have in mind.
           </p>
         </div>
-        <form className="w-full" onSubmit={handleSubmit}>
-          <div className="flex md:flex-row flex-col md:space-x-[24px] md:space-y-0 space-y-[24px]">
-            <InputField
-              title="First name"
-              type="text"
-              name="first_name"
-              value={first_name}
-              onChange={handleInputChange}
-              placeholder="Enter your first name"
-              id="first_name"
-              // errorMessage={
-              //   error && (
-              //     <ErrorMessageContainer errorMessage="Please enter your first name" />
-              //   )
-              // }
-            />
-            <InputField
-              title="Last name"
-              type="text"
-              name="last_name"
-              value={last_name}
-              onChange={handleInputChange}
-              placeholder="Enter your last name"
-              id="last_name"
-              // errorMessage={
-              //   error && (
-              //     <ErrorMessageContainer errorMessage="Please enter your last name" />
-              //   )
-              // }
-            />
-          </div>
-          <div className="mt-[24px]">
-            <InputField
-              title="Email"
-              type="email"
-              name="email"
-              value={email}
-              onChange={handleInputChange}
-              placeholder="yourname@email.com"
-              id="email"
-              // errorMessage={
-              //   error && (
-              //     <ErrorMessageContainer errorMessage="Please enter your email" />
-              //   )
-              // }
-            />
-          </div>
-          <div className="mt-[24px]">
-            <TextAreaField
-              title="Message"
-              placeholder="Send me a message and I'll reply you as soon as possible..."
-              id="message"
-              name="message"
-              value={message}
-              onChange={handleInputChange}
-              // errorMessage={
-              //   error && (
-              //     <ErrorMessageContainer errorMessage="Please enter your message" />
-              //   )
-              // }
-            />
-          </div>
-          <div
-            className="mt-[24px] flex space-x-[12px] cursor-pointer w-fit"
-            onClick={handleToggleCheckBox}
-          >
-            {toggleCheckBox ? (
-              <img src={InputCheckBoxOn} alt="Input CheckBox On" />
-            ) : (
-              <img src={InputCheckBoxOff} alt="Input CheckBox Off" />
-            )}
-            <p className="text-[#475467] font-normal text-[16px] leading-[24px]">
-              You agree to providing your data to {name} who may contact you.
-            </p>
-          </div>
-          <button
-            id="btn__submit"
-            className={`submit__button mt-[32px] md:mb-[236px] mb-[146px] py-[12px] text-center  border border-[#1570EF] rounded-[8px] w-full text-white ${
-              toggleCheckBox
-                ? "bg-[#175CD3]"
-                : "bg-[#1570EF] pointer-events-none "
-            }`}
-          >
-            Send message
-          </button>
-        </form>
+        <Formik
+          initialValues={initialState}
+          validate={(values) => {
+            const errors = {};
+            if (!values.email) {
+              errors.email = "Please enter a email";
+              if (!values.first_name) {
+                errors.first_name = "Please enter first name";
+              }
+              if (!values.last_name) {
+                errors.last_name = "Please enter last name";
+              }
+
+              if (!values.message) {
+                errors.message = "Please enter message";
+              }
+            } else if (
+              !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+            ) {
+              errors.email = "enter a valid email";
+            }
+            return errors;
+          }}
+          onSubmit={(values, { setSubmitting, resetForm }) => {
+            try {
+              setTimeout(() => {
+                setContactFormData(values);
+                setSubmitting(false);
+                resetForm({ values: "" });
+                setToggleCheckBox(false);
+              }, 2000);
+            } catch (error) {
+              // setSubmitting(true);
+            }
+          }}
+        >
+          {({
+            values,
+            errors,
+            touched,
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            isSubmitting,
+            /* and other goodies */
+          }) => (
+            <form className="w-full" onSubmit={handleSubmit}>
+              <div className="flex md:flex-row flex-col md:space-x-[24px] md:space-y-0 space-y-[24px]">
+                <div>
+                  <InputField
+                    title="First name"
+                    type="text"
+                    name="first_name"
+                    value={values.first_name}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    placeholder="Enter your first name"
+                    id="first_name"
+                  />
+                  <ErrorMessage
+                    error={
+                      errors.first_name &&
+                      touched.first_name &&
+                      errors.first_name
+                    }
+                  />
+                </div>
+                <div>
+                  <InputField
+                    title="Last name"
+                    type="text"
+                    name="last_name"
+                    value={values.last_name}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    placeholder="Enter your last name"
+                    id="last_name"
+                  />
+                  <ErrorMessage
+                    error={
+                      errors.last_name && touched.last_name && errors.last_name
+                    }
+                  />
+                </div>
+              </div>
+              <div className="mt-[24px]">
+                <InputField
+                  title="Email"
+                  type="email"
+                  name="email"
+                  value={values.email}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  placeholder="yourname@email.com"
+                  id="email"
+                />
+                <ErrorMessage
+                  error={errors.email && touched.email && errors.email}
+                />
+              </div>
+              <div className="mt-[24px]">
+                <TextAreaField
+                  title="Message"
+                  placeholder="Send me a message and I'll reply you as soon as possible..."
+                  id="message"
+                  name="message"
+                  value={values.message}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                <ErrorMessage
+                  error={errors.message && touched.message && errors.message}
+                />
+              </div>
+              <div
+                className="mt-[24px] flex space-x-[12px] cursor-pointer w-fit"
+                onClick={handleToggleCheckBox}
+              >
+                {toggleCheckBox ? (
+                  <img src={InputCheckBoxOn} alt="Input CheckBox On" />
+                ) : (
+                  <img src={InputCheckBoxOff} alt="Input CheckBox Off" />
+                )}
+                <p className="text-[#475467] font-normal text-[16px] leading-[24px]">
+                  You agree to providing your data to {name} who may contact
+                  you.
+                </p>
+              </div>
+              <button
+                id="btn__submit"
+                type="submit"
+                disabled={isSubmitting}
+                className={`submit__button mt-[32px] md:mb-[236px] mb-[146px] py-[12px] text-center  border border-[#1570EF] rounded-[8px] w-full text-white ${
+                  toggleCheckBox
+                    ? "bg-[#175CD3]"
+                    : "bg-[#1570EF] pointer-events-none "
+                }`}
+              >
+                {isSubmitting ? "Sending" : "Send message"}
+              </button>
+            </form>
+          )}
+        </Formik>
       </div>
     </div>
   );

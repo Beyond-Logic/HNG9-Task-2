@@ -10,7 +10,7 @@ const TextAreaField = ({
   name,
   onChange,
   value,
-  errorMessage,
+  onBlur,
 }) => {
   return (
     <div className="w-full">
@@ -24,10 +24,10 @@ const TextAreaField = ({
         name={name}
         onChange={onChange}
         placeholder={placeholder}
+        onBlur={onBlur}
         className="w-full border border-[#D0D5DD] rounded-[8px] py-[12px] px-[14px] outline-[#84CAFF] text-[#101828]"
         style={{ height: "132px", resize: "none" }}
       />
-      {errorMessage}
     </div>
   );
 };
