@@ -11,6 +11,8 @@ import { toast } from "react-hot-toast";
 import { TailSpin } from "react-loader-spinner";
 
 const ContactForm = () => {
+  const name = "BeyondLogic";
+  const [formMessage, setFormMessage] = useState("");
   const initialState = {
     first_name: "",
     last_name: "",
@@ -18,17 +20,13 @@ const ContactForm = () => {
     message: "",
   };
 
-  const [contactFormData, setContactFormData] = useState(initialState);
+  const [, setContactFormData] = useState(initialState);
 
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
 
   const handleToggleCheckBox = () => {
     setToggleCheckBox(!toggleCheckBox);
   };
-
-  const name = "BeyondLogic";
-  console.log("object,", contactFormData);
-
   return (
     <div className="md:mt-[156px] mt-[64px] xl:px-[360px] lg:px-[180px] md:px-[90px] px-[16px]">
       <div className="flex flex-col justify-center items-center">
@@ -68,9 +66,9 @@ const ContactForm = () => {
               setTimeout(() => {
                 setContactFormData(values);
                 setSubmitting(false);
-                resetForm({ values: "" });
+                resetForm({ values: "" || setFormMessage("") });
                 setToggleCheckBox(false);
-                toast.success(`Message Sent`);
+                toast.success(`Form Sent`);
               }, 2000);
             } catch (error) {
               toast.error("Something went Wrong");
@@ -85,6 +83,7 @@ const ContactForm = () => {
             handleBlur,
             handleSubmit,
             isSubmitting,
+
             /* and other goodies */
           }) => (
             <form className="w-full" onSubmit={handleSubmit}>
@@ -147,10 +146,16 @@ const ContactForm = () => {
                   placeholder="Send me a message and I'll reply you as soon as possible..."
                   id="message"
                   name="message"
-                  value={values.message}
+                  value={values.message || formMessage}
                   onChange={handleChange}
                   onBlur={handleBlur}
+                  onClick={(e) =>
+                    setFormMessage(
+                      `Hey ${name}, hope you are doing great. Let us collaborate on project axyz.`
+                    )
+                  }
                 />
+
                 <ErrorMessage
                   error={errors.message && touched.message && errors.message}
                 />

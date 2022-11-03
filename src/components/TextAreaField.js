@@ -11,6 +11,7 @@ const TextAreaField = ({
   onChange,
   value,
   onBlur,
+  onClick,
 }) => {
   return (
     <div className="w-full">
@@ -27,6 +28,7 @@ const TextAreaField = ({
         onBlur={onBlur}
         className="w-full border border-[#D0D5DD] rounded-[8px] py-[12px] px-[14px] outline-[#84CAFF] text-[#101828]"
         style={{ height: "132px", resize: "none" }}
+        onClick={onClick}
       />
     </div>
   );
