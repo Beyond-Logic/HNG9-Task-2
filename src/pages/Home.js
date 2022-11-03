@@ -1,7 +1,7 @@
 /** @format */
 
 import React from "react";
-import { MainSection } from "../components";
+import { Footer, MainSection } from "../components";
 import NavBar from "../components/NavBar";
 
 const Home = () => {
@@ -10,7 +10,7 @@ const Home = () => {
       <div className="md:px-[114px] px-[16px]">
         <NavBar />
         <MainSection />
-        {/* <Footer />  */}
+        <Footer />
       </div>
     </div>
   );
