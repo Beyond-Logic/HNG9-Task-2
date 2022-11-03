@@ -7,6 +7,7 @@ import TextAreaField from "./TextAreaField";
 import InputCheckBoxOff from "../assets/InputCheckBox1.svg";
 import InputCheckBoxOn from "../assets/InputCheckBox2.svg";
 import ErrorMessage from "./ErrorMessage";
+import { toast } from "react-hot-toast";
 
 const ContactForm = () => {
   const initialState = {
@@ -68,9 +69,10 @@ const ContactForm = () => {
                 setSubmitting(false);
                 resetForm({ values: "" });
                 setToggleCheckBox(false);
+                toast.success(`Message Sent`);
               }, 2000);
             } catch (error) {
-              // setSubmitting(true);
+              toast.error("Something went Wrong");
             }
           }}
         >
