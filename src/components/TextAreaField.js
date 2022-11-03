@@ -12,7 +12,7 @@ const TextAreaField = ({ title, type, placeholder, id }) => {
         id={id}
         type={type}
         placeholder={placeholder}
-        className="w-full border border-[#D0D5DD] rounded-[8px] py-[12px] px-[14px] outline-[#84CAFF]"
+        className="w-full border border-[#D0D5DD] rounded-[8px] py-[12px] px-[14px] outline-[#84CAFF] text-[#101828]"
         style={{ height: "132px", resize: "none" }}
       />
     </div>

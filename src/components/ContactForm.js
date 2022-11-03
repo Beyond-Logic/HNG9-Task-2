@@ -1,10 +1,18 @@
 /** @format */
 
-import React from "react";
+import React, { useState } from "react";
 import InputField from "./InputField";
 import TextAreaField from "./TextAreaField";
+import InputCheckBoxOff from "../assets/InputCheckBox1.svg";
+import InputCheckBoxOn from "../assets/InputCheckBox2.svg";
 
 const ContactForm = () => {
+  const [toggleCheckBox, setToggleCheckBox] = useState(false);
+
+  const handleToggleCheckBox = () => {
+    setToggleCheckBox(!toggleCheckBox);
+  };
+
   const name = "BeyondLogic";
   return (
     <div className="md:mt-[156px] mt-[64px] xl:px-[360px] lg:px-[180px] md:px-[90px] px-[16px]">
@@ -17,7 +25,7 @@ const ContactForm = () => {
             Hi there, contact me to ask me about anything you have in mind.
           </p>
         </div>
-        <div className="w-full">
+        <form className="w-full">
           <div className="flex md:flex-row flex-col md:space-x-[24px] md:space-y-0 space-y-[24px]">
             <InputField
               title="First name"
@@ -47,13 +55,15 @@ const ContactForm = () => {
               id="message"
             />
           </div>
-          <div className="mt-[24px] flex space-x-[12px] cursor-pointer">
-            <input
-              type="checkbox"
-              width="24px"
-              height="24px"
-              className="rounded-[6px] border border-[#D0D5DD]"
-            />
+          <div
+            className="mt-[24px] flex space-x-[12px] cursor-pointer w-fit"
+            onClick={handleToggleCheckBox}
+          >
+            {toggleCheckBox ? (
+              <img src={InputCheckBoxOn} alt="Input CheckBox On" />
+            ) : (
+              <img src={InputCheckBoxOff} alt="Input CheckBox Off" />
+            )}
             <p className="text-[#475467] font-normal text-[16px] leading-[24px]">
               You agree to providing your data to {name} who may contact you.
             </p>
@@ -64,7 +74,7 @@ const ContactForm = () => {
           >
             Send message
           </button>
-        </div>
+        </form>
       </div>
     </div>
   );
