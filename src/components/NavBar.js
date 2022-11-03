@@ -1,9 +1,15 @@
-import React from 'react'
+/** @format */
+
+import React from "react";
+
+import ProfileCard from "./ProfileCard";
 
 const NavBar = () => {
   return (
-    <div>NavBar</div>
-  )
-}
+    <div className="mt-[64px]">
+      <ProfileCard />
+    </div>
+  );
+};
 
-export default NavBar
+export default NavBar;
