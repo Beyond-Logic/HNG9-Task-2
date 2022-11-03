@@ -8,6 +8,7 @@ import InputCheckBoxOff from "../assets/InputCheckBox1.svg";
 import InputCheckBoxOn from "../assets/InputCheckBox2.svg";
 import ErrorMessage from "./ErrorMessage";
 import { toast } from "react-hot-toast";
+import { TailSpin } from "react-loader-spinner";
 
 const ContactForm = () => {
   const initialState = {
@@ -155,7 +156,7 @@ const ContactForm = () => {
                 />
               </div>
               <div
-                className="mt-[24px] flex space-x-[12px] cursor-pointer w-fit"
+                className="mt-[24px] flex space-x-[12px] cursor-pointer w-fit md:items-center items-start"
                 onClick={handleToggleCheckBox}
               >
                 {toggleCheckBox ? (
@@ -178,7 +179,22 @@ const ContactForm = () => {
                     : "bg-[#1570EF] pointer-events-none "
                 }`}
               >
-                {isSubmitting ? "Sending" : "Send message"}
+                {isSubmitting ? (
+                  <div className="flex justify-center items-center">
+                    <TailSpin
+                      height="25"
+                      width="25"
+                      color="#fff"
+                      ariaLabel="tail-spin-loading"
+                      radius="1"
+                      wrapperStyle={{}}
+                      wrapperClass=""
+                      visible={true}
+                    />
+                  </div>
+                ) : (
+                  "Send message"
+                )}
               </button>
             </form>
           )}
