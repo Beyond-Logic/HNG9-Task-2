@@ -4,15 +4,14 @@ import React, { useState } from "react";
 import { Formik } from "formik";
 import InputField from "./InputField";
 import TextAreaField from "./TextAreaField";
-import InputCheckBoxOff from "../assets/InputCheckBox1.svg";
-import InputCheckBoxOn from "../assets/InputCheckBox2.svg";
+// import InputCheckBoxOff from "../assets/InputCheckBox1.svg";
+// import InputCheckBoxOn from "../assets/InputCheckBox2.svg";
 import ErrorMessage from "./ErrorMessage";
 import { toast } from "react-hot-toast";
 import { TailSpin } from "react-loader-spinner";
 
 const ContactForm = () => {
   const name = "BeyondLogic";
-  const [formMessage, setFormMessage] = useState("");
   const initialState = {
     first_name: "",
     last_name: "",
@@ -20,13 +19,14 @@ const ContactForm = () => {
     message: "",
   };
 
-  const [, setContactFormData] = useState(initialState);
+  const [formData, setContactFormData] = useState(initialState);
 
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
 
-  const handleToggleCheckBox = () => {
-    setToggleCheckBox(!toggleCheckBox);
-  };
+  // const handleToggleCheckBox = () => {
+  //   setToggleCheckBox(!toggleCheckBox);
+  // };
+  console.log(formData);
   return (
     <div className="md:mt-[156px] mt-[64px] xl:px-[360px] lg:px-[180px] md:px-[90px] px-[16px]">
       <div className="flex flex-col justify-center items-center">
@@ -39,6 +39,7 @@ const ContactForm = () => {
           </p>
         </div>
         <Formik
+          enableReinitialize
           initialValues={initialState}
           validate={(values) => {
             const errors = {};
@@ -57,7 +58,7 @@ const ContactForm = () => {
             } else if (
               !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
             ) {
-              errors.email = "enter a valid email";
+              errors.email = "Enter a valid email";
             }
             return errors;
           }}
@@ -66,7 +67,7 @@ const ContactForm = () => {
               setTimeout(() => {
                 setContactFormData(values);
                 setSubmitting(false);
-                resetForm({ values: "" || setFormMessage("") });
+                resetForm({ values: "" });
                 setToggleCheckBox(false);
                 toast.success(`Form Sent`);
               }, 2000);
@@ -83,8 +84,7 @@ const ContactForm = () => {
             handleBlur,
             handleSubmit,
             isSubmitting,
-
-            /* and other goodies */
+            setFieldValue,
           }) => (
             <form className="w-full" onSubmit={handleSubmit}>
               <div className="flex md:flex-row flex-col md:space-x-[24px] md:space-y-0 space-y-[24px]">
@@ -146,11 +146,12 @@ const ContactForm = () => {
                   placeholder="Send me a message and I'll reply you as soon as possible..."
                   id="message"
                   name="message"
-                  value={values.message || formMessage}
+                  value={values.message}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  onClick={(e) =>
-                    setFormMessage(
+                  onClick={() =>
+                    setFieldValue(
+                      "message",
                       `Hey ${name}, hope you are doing great. Let us collaborate on project axyz.`
                     )
                   }
@@ -160,7 +161,7 @@ const ContactForm = () => {
                   error={errors.message && touched.message && errors.message}
                 />
               </div>
-              <div
+              {/* <div
                 className="mt-[24px] flex space-x-[12px] cursor-pointer w-fit md:items-center items-start"
                 onClick={handleToggleCheckBox}
               >
@@ -169,11 +170,31 @@ const ContactForm = () => {
                 ) : (
                   <img src={InputCheckBoxOff} alt="Input CheckBox Off" />
                 )}
+
+                <input
+                  type="checkbox"
+                  className="py-[20px] px-3 checked:bg-green-500"
+                />
+
                 <p className="text-[#475467] font-normal text-[16px] leading-[24px]">
                   You agree to providing your data to {name} who may contact
                   you.
                 </p>
-              </div>
+              </div> */}
+              <label
+                htmlFor="checkbox"
+                className="checkbox__container mt-[24px] cursor-pointer w-fit text-[#475467] font-normal text-[16px] leading-[24px]"
+              >
+                <input
+                  type="checkbox"
+                  id="checkbox"
+                  onChange={() => setToggleCheckBox(!toggleCheckBox)}
+                  checked={toggleCheckBox}
+                  // onClick={() => setToggleCheckBox(!toggleCheckBox)}
+                />
+                You agree to providing your data to {name} who may contact you.
+                <span className="check__mark"></span>
+              </label>
               <button
                 id="btn__submit"
                 type="submit"
