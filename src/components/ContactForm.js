@@ -19,14 +19,13 @@ const ContactForm = () => {
     message: "",
   };
 
-  const [formData, setContactFormData] = useState(initialState);
+  const [, setContactFormData] = useState(initialState);
 
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
 
   // const handleToggleCheckBox = () => {
   //   setToggleCheckBox(!toggleCheckBox);
   // };
-  console.log(formData);
   return (
     <div className="md:mt-[156px] mt-[64px] xl:px-[360px] lg:px-[180px] md:px-[90px] px-[16px]">
       <div className="flex flex-col justify-center items-center">
