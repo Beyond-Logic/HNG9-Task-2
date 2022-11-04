@@ -11,6 +11,7 @@ const InputField = ({
   onChange,
   value,
   onBlur,
+  errorColor,
 }) => {
   return (
     <div className="w-full">
@@ -26,7 +27,7 @@ const InputField = ({
         value={value}
         name={name}
         placeholder={placeholder}
-        className="w-full mt-[6px]  border border-[#D0D5DD] rounded-[8px] py-[10px] px-[14px] text-[16px] leading-[24px] text-[#101828] outline-[#84CAFF]"
+        className={`w-full mt-[6px] border-[#D0D5DD] rounded-[8px] py-[10px] px-[14px] text-[16px] leading-[24px] text-[#101828] outline-[#84CAFF] border-[1px] ${errorColor}`}
         onChange={onChange}
         onBlur={onBlur}
       />

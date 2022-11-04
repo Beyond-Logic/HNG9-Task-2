@@ -97,6 +97,12 @@ const ContactForm = () => {
                     onBlur={handleBlur}
                     placeholder="Enter your first name"
                     id="first_name"
+                    errorColor={
+                      errors.first_name &&
+                      touched.first_name &&
+                      errors.first_name &&
+                      "border-[#F89687]"
+                    }
                   />
                   <ErrorMessage
                     error={
@@ -116,6 +122,12 @@ const ContactForm = () => {
                     onBlur={handleBlur}
                     placeholder="Enter your last name"
                     id="last_name"
+                    errorColor={
+                      errors.last_name &&
+                      touched.last_name &&
+                      errors.last_name &&
+                      "border-[#F89687]"
+                    }
                   />
                   <ErrorMessage
                     error={
@@ -134,6 +146,12 @@ const ContactForm = () => {
                   onBlur={handleBlur}
                   placeholder="yourname@email.com"
                   id="email"
+                  errorColor={
+                    errors.email &&
+                    touched.email &&
+                    errors.email &&
+                    "border-[#F89687]"
+                  }
                 />
                 <ErrorMessage
                   error={errors.email && touched.email && errors.email}
@@ -153,6 +171,12 @@ const ContactForm = () => {
                       "message",
                       `Hey ${name}, hope you are doing great. Let us collaborate on project axyz.`
                     )
+                  }
+                  errorColor={
+                    errors.message &&
+                    touched.message &&
+                    errors.message &&
+                    "border-[#F89687]"
                   }
                 />
 
