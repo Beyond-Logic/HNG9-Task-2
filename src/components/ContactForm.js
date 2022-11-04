@@ -43,7 +43,7 @@ const ContactForm = () => {
           validate={(values) => {
             const errors = {};
             if (!values.email) {
-              errors.email = "Please enter a email";
+              errors.email = "Please enter email";
               if (!values.first_name) {
                 errors.first_name = "Please enter first name";
               }
@@ -52,7 +52,7 @@ const ContactForm = () => {
               }
 
               if (!values.message) {
-                errors.message = "Please enter message";
+                errors.message = "Please enter a message";
               }
             } else if (
               !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
