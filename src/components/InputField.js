@@ -27,8 +27,8 @@ const InputField = ({
         value={value}
         name={name}
         placeholder={placeholder}
-        className={`w-full mt-[6px] border-[#D0D5DD] rounded-[8px] py-[10px] px-[14px] text-[16px] leading-[24px] text-[#101828] outline-[#84CAFF] border-[1px] ${
-          errorColor ? errorColor : ""
+        className={`w-full mt-[6px] rounded-[8px] py-[10px] px-[14px] text-[16px] leading-[24px] text-[#101828] outline-[#84CAFF] border-[1px] ${
+          errorColor ? errorColor : "border-[#D0D5DD]"
         }`}
         onChange={onChange}
         onBlur={onBlur}

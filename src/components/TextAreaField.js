@@ -30,8 +30,8 @@ const TextAreaField = ({
         onChange={onChange}
         placeholder={placeholder}
         onBlur={onBlur}
-        className={`w-full mt-[6px] border-[#D0D5DD] rounded-[8px] py-[12px] px-[14px] outline-[#84CAFF] border-[1px] text-[#101828] ${
-          errorColor ? errorColor : ""
+        className={`w-full mt-[6px]  rounded-[8px] py-[12px] px-[14px] outline-[#84CAFF] border-[1px] text-[#101828] ${
+          errorColor ? errorColor : "border-[#D0D5DD]"
         }`}
         style={{ height: "132px", resize: "none" }}
         onClick={onClick}
