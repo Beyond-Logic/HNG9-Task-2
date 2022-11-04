@@ -58,6 +58,7 @@ const Links = [
     id: "contact",
     fontWeight: true,
     key: 6,
+    linkRouter: true,
   },
 ];
 
@@ -75,6 +76,7 @@ const MainSection = () => {
               fontweight={item.fontWeight}
               subtext={item.subtext}
               dataFor={item.dataFor}
+              LinkRoute={item.linkRouter}
             />
           ))}
       </div>

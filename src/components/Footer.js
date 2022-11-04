@@ -5,6 +5,7 @@ import React from "react";
 import ZuriInternshipLogo from "../assets/ZuriInternshipLogo.svg";
 import I4Glogo from "../assets/I4GLogo.svg";
 import "../";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -14,9 +15,11 @@ const Footer = () => {
         alt="Zuri Internship logo"
         className="lg:w-auto  w-[138.77px]"
       />
-      <h4 className="font-normal md:text-[16px] text-[14px] text-[#667085] md:leading-[24px] leading-[20px]">
-        HNG Internship 9 Frontend Task
-      </h4>
+      <Link to="/">
+        <h4 className="font-normal md:text-[16px] text-[14px] text-[#667085] md:leading-[24px] leading-[20px]">
+          HNG Internship 9 Frontend Task
+        </h4>
+      </Link>
       <img src={I4Glogo} alt="I4G logo" className="lg:w-auto w-[99.1px]" />
     </div>
   );
