@@ -101,7 +101,7 @@ const ContactForm = () => {
                       errors.first_name &&
                       touched.first_name &&
                       errors.first_name &&
-                      "border-[#F89687]"
+                      "border-[#F89687] outline-#F89687"
                     }
                   />
                   <ErrorMessage
@@ -126,7 +126,7 @@ const ContactForm = () => {
                       errors.last_name &&
                       touched.last_name &&
                       errors.last_name &&
-                      "border-[#F89687]"
+                      "border-[#F89687] outline-#F89687"
                     }
                   />
                   <ErrorMessage
@@ -150,7 +150,7 @@ const ContactForm = () => {
                     errors.email &&
                     touched.email &&
                     errors.email &&
-                    "border-[#F89687]"
+                    "border-[#F89687] outline-#F89687"
                   }
                 />
                 <ErrorMessage
@@ -176,7 +176,7 @@ const ContactForm = () => {
                     errors.message &&
                     touched.message &&
                     errors.message &&
-                    "border-[#F89687]"
+                    "border-[#F89687] outline-#F89687"
                   }
                 />
 
