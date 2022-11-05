@@ -88,7 +88,7 @@ const ContactForm = () => {
           }) => (
             <form className="w-full" onSubmit={handleSubmit}>
               <div className="flex md:flex-row flex-col md:space-x-[24px] md:space-y-0 space-y-[24px]">
-                <div>
+                <div className="w-full">
                   <InputField
                     title="First name"
                     type="text"
@@ -113,7 +113,7 @@ const ContactForm = () => {
                     }
                   />
                 </div>
-                <div>
+                <div className="w-full">
                   <InputField
                     title="Last name"
                     type="text"
