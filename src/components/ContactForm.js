@@ -223,7 +223,7 @@ const ContactForm = () => {
                 id="btn__submit"
                 type="submit"
                 disabled={isSubmitting}
-                className={`submit__button mt-[32px] md:mb-[236px] mb-[146px] py-[12px] text-center  border border-[#1570EF] rounded-[8px] w-full text-white ${
+                className={`mt-[32px] md:mb-[236px] mb-[146px] py-[12px] text-center  border border-[#1570EF] rounded-[8px] w-full text-white submit__button ${
                   toggleCheckBox
                     ? "bg-[#175CD3]"
                     : "bg-[#1570EF] pointer-events-none "
