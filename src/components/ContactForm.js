@@ -44,20 +44,21 @@ const ContactForm = () => {
             const errors = {};
             if (!values.email) {
               errors.email = "Please enter email";
-              if (!values.first_name) {
-                errors.first_name = "Please enter first name";
-              }
-              if (!values.last_name) {
-                errors.last_name = "Please enter last name";
-              }
-
-              if (!values.message) {
-                errors.message = "Please enter a message";
-              }
             } else if (
               !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
             ) {
               errors.email = "Enter a valid email";
+            }
+
+            if (!values.first_name) {
+              errors.first_name = "Please enter first name";
+            }
+            if (!values.last_name) {
+              errors.last_name = "Please enter last name";
+            }
+
+            if (!values.message) {
+              errors.message = "Please enter a message";
             }
             return errors;
           }}
